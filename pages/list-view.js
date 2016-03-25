@@ -48,10 +48,13 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#16a085',
+    backgroundColor: '#1abc9c',
+    borderColor: '#16a085',
     borderRadius: 5,
+    borderWidth: 2,
     flexDirection: 'row',
     justifyContent: 'center',
+    opacity: 0.7,
     padding: 10
   },
   buttonText: {
