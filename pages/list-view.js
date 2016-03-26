@@ -1,4 +1,5 @@
 import React, {
+  AsyncStorage,
   AppRegistry,
   StyleSheet,
   View,
@@ -7,12 +8,18 @@ import React, {
 
 import Button from 'react-native-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+
 import ItemView from './item-view';
+import api from '../components/api/api';
+
+let statusUpdating = false;
 
 class ListView extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      currentOffset: 0,
       toRoute: props.toRoute
     }
   }
@@ -24,18 +31,46 @@ class ListView extends React.Component {
     })
   }
 
+  componentWillMount() {
+    this.getPokemons();
+  }
+
   render() {
     return(
       <View style={styles.container}>
         <Text>Hello form Main Component</Text>
-        <Button onPress={this.nextRouteButton.bind(this)}>
+        <Button onPress={this.getPokemons.bind(this)}>
           <View style={styles.button}>
-            <Icon name="refresh" size={16} color="#ecf0f1" />
+            <Icon name="refresh" size={18} color="#ecf0f1" />
             <Text style={styles.buttonText}>LOAD MORE</Text>
           </View>
         </Button>
       </View>
     );
+  }
+
+  getPokemons() {
+    statusUpdating = true;
+    const API_LINK = 'http://pokeapi.co/api/v2/pokemon/?limit=12';
+    let items = [];
+
+    api(API_LINK).then((data) => {
+      for (let item of data.results) {
+        api(item.url).then((data) => {
+          console.log(data);
+        });
+      }
+    });
+  }
+
+  updateItemsDB(items) {
+    AsyncStorage.setItem('items', JSON.stringify(items));
+  }
+
+  updateItemsState(items) {
+    this.state = {
+      items: items
+    };
   }
 }
 
