@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import ItemView from './item-view';
 import api from '../components/api/api';
+import Item from '../components/item/item';
 
 let statusUpdating = false;
 
@@ -32,13 +33,34 @@ class ListView extends React.Component {
   }
 
   componentWillMount() {
-    this.getPokemons();
+    this.getPokemons.bind(this);
   }
 
   render() {
     return(
       <View style={styles.container}>
-        <Text>Hello form Main Component</Text>
+        <View style={styles.content}>
+          <View style={styles.items_row}>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+          </View>
+          <View style={styles.items_row}>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+          </View>
+          <View style={styles.items_row}>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+          </View>
+          <View style={styles.items_row}>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+            <Item showItemAction={this.nextRouteButton.bind(this)}/>
+          </View>
+        </View>
         <Button onPress={this.getPokemons.bind(this)}>
           <View style={styles.button}>
             <Icon name="refresh" size={18} color="#ecf0f1" />
@@ -58,9 +80,11 @@ class ListView extends React.Component {
       for (let item of data.results) {
         api(item.url).then((data) => {
           console.log(data);
+          items.push(data);
         });
       }
     });
+    statusUpdating = false;
   }
 
   updateItemsDB(items) {
@@ -78,8 +102,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    padding: 10,
+    padding: 5,
     backgroundColor: '#ecf0f1'
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'column'
   },
   button: {
     alignItems: 'center',
@@ -91,6 +119,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     opacity: 0.7,
     padding: 10
+  },
+  items_row: {
+    flexDirection: 'row'
   },
   buttonText: {
     color: '#ecf0f1',
