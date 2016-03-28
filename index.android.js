@@ -1,51 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 import React, {
   AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View
+  StyleSheet
 } from 'react-native';
 
-class pokedex extends Component {
+import Router from 'react-native-simple-router';
+import backButton from './components/backButton/backButton';
+import ListView from './pages/list-view';
+
+const firstRoute = {
+  name: 'Pokédex!',
+  component: ListView,
+};
+
+const statusBarProps = {
+  backgroundColor: '#16a085',
+};
+
+class pokedex extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+    return(
+      <Router
+        firstRoute={firstRoute}
+        headerStyle={styles.navbar}
+        backButtonComponent={backButton}
+        statusBarProps={statusBarProps}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  navbar: {
+    backgroundColor: '#1abc9c',
+    borderBottomColor: '#16a085',
+    borderBottomWidth: 3
+  }
 });
 
 AppRegistry.registerComponent('pokedex', () => pokedex);

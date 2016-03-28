@@ -98,6 +98,8 @@ class ListView extends React.Component {
   }
 }
 
+// TODO: refactor styles
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -118,9 +120,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     opacity: 0.7,
-    padding: 10
+    padding: 10,
+    marginTop: 10
   },
   items_row: {
+    flex: 1,
     flexDirection: 'row'
   },
   buttonText: {

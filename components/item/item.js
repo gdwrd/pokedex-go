@@ -16,7 +16,7 @@ class Item extends React.Component {
 
   render() {
     return(
-      <TouchableHighlight onPress={this.state.showItemAction}>
+      <TouchableHighlight style={styles.btn} onPress={this.state.showItemAction}>
         <View style={styles.container}>
           <Image
             style={styles.image}
@@ -36,8 +36,7 @@ class Item extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: 111,
-    height: 125,
+    flex: 1,
     backgroundColor: '#1abc9c',
     borderBottomColor: '#16a085',
     borderBottomWidth: 2,
@@ -57,6 +56,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   tags: {
+    flex: 1
+  },
+  btn: {
     flex: 1
   }
 })
